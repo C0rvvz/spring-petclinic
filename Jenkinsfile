@@ -6,7 +6,7 @@ pipeline {
     stage('Maven Install') {
       agent {
         docker {
-          image 'maven:3.5.0'
+          image 'maven:3.9.6'
         }
       }
       steps {
@@ -14,9 +14,14 @@ pipeline {
       }
     }
     stage('Docker Build') {
-      agent any
+      agent {
+        docker {
+          image 'docker:latest' 
+          args '-v /var/run/docker.sock:/var/run/docker.sock'
+        }
+      }
       steps {
-        sh 'docker build -t shanem/spring-petclinic:latest .'
+        sh 'docker build -t C0rvvz/spring-petclinic:latest .'
       }
     }
   }
