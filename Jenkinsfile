@@ -21,7 +21,7 @@ pipeline {
         }
       }
       steps {
-        sh 'docker build -t C0rvvz/spring-petclinic:latest .'
+        sh 'docker build -t c0rvvz/spring-petclinic:latest .'
       }
     }
   }
