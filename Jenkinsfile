@@ -19,18 +19,19 @@ pipeline {
       }
     }
     stage('Docker Push') {
-        agent any
-        steps {
-            withCredentials([usernamePassword(
-                credentialsId: 'admin',   // El ID que guardaste en Jenkins
-                usernameVariable: 'DOCKERHUB_USER', 
-                passwordVariable: 'DOCKERHUB_PASS'
-            )]) {
-                sh "docker tag spring-petclinic:latest ${DOCKERHUB_USER}/spring-petclinic:latest"
-                sh "docker login -u ${DOCKERHUB_USER} -p ${DOCKERHUB_PASS}"
-                sh "docker push ${DOCKERHUB_USER}/spring-petclinic:latest"
-            }
+      agent any
+      steps {
+        withCredentials([usernamePassword(
+          credentialsId: 'admin',  // tu credencial creada
+          passwordVariable: 'DOCKER_PASSWORD',
+          usernameVariable: 'DOCKER_USERNAME'
+        )]) {
+          // Tag y push de la imagen
+          sh "docker tag spring-petclinic:latest ${DOCKER_USERNAME}/spring-petclinic:latest"
+          sh "docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}"
+          sh "docker push ${DOCKER_USERNAME}/spring-petclinic:latest"
         }
+      }
     }
   }
 }
