@@ -1,6 +1,6 @@
 FROM openjdk:17-jdk-alpine
 
-# Instala dependencias necesarias para Alpine (si usas la versión Alpine)
+# Instalar dependencias usando apk
 RUN apk update && apk add --no-cache fontconfig
 
 LABEL maintainer="jarango688@soyudemedellin.edu.co"

@@ -15,16 +15,16 @@ pipeline {
     stage('Docker Build') {
       agent any
       steps {
-        sh 'docker build -t spring-petclinic:latest .'
+        sh 'docker build -t spring-petclinic:latest --progress=plain .'
       }
     }
     stage('Docker Push') {
       agent any
       steps {
         withCredentials([usernamePassword(
-          credentialsId: 'admin',
-          passwordVariable: 'DOCKER_PASSWORD',
-          usernameVariable: 'DOCKER_USERNAME'
+          credentialsId: 'admin',  // ID del token en Jenkins
+          usernameVariable: 'DOCKER_USERNAME',
+          passwordVariable: 'DOCKER_PASSWORD'
         )]) {
           script {
             sh "docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}"
