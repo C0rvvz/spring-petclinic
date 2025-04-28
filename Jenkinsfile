@@ -14,12 +14,7 @@ pipeline {
       }
     }
     stage('Docker Build') {
-      agent {
-        docker {
-          image 'docker:latest' 
-          args '-v /var/run/docker.sock:/var/run/docker.sock'
-        }
-      }
+      agent any
       steps {
         sh 'docker build -t c0rvvz/spring-petclinic:latest .'
       }
