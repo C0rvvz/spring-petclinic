@@ -1,4 +1,4 @@
-FROM eclipse-temurin:17-jdk
+FROM openjdk:17-jdk-alpine
 
 # Instala dependencias necesarias para Alpine (si usas la versión Alpine)
 RUN apt-get update && apt-get install -y fontconfig
